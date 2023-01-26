@@ -70,6 +70,11 @@
   .menu__item:hover {
     background-color: #CFD8DC;
   } 
+  .back{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+  }
   .center{
     display: flex;
     margin: 0 auto;
@@ -82,9 +87,20 @@
   }
   ul{
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  h4{
+    display: flex;
+    margin-left: 10px;
   }
   .image {
     scale: 0.8;
+    border-radius: 50%;
   }
   .grid{
     display: grid;
@@ -103,7 +119,8 @@
     place-items: center;
   }
   hr{
-    display: none;
+    width: 120px;
+    color: black;
   }
   .pkmnimg {
     height: 100px;

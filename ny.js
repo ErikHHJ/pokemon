@@ -50,12 +50,12 @@ const renderCards = (arr) => {
         let imageArr = Object.values(bilde);
         image.src = imageArr;
         container.appendChild(image);
-      //  container.appencChild(imageArr)
+      
 
         
         const langHead = document.createElement("h4");
 
-langHead.innerHTML = "name in other languages";
+langHead.innerHTML = "Name in other languages";
 container.appendChild(langHead);
 const langList = document.createElement("ul");
 const  jpn = document.createElement("li");

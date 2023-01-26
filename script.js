@@ -12,7 +12,7 @@ import {
  } from "./pokemon.js";
  
  
- const selectedPokemon = wartortle; 
+ const selectedPokemon = charmander; 
  const statlist = document.querySelector("#statlist")
  const typelist = document.querySelector("#typelist")
  const langList = document.querySelector("#langlist")
