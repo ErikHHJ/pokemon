@@ -12,7 +12,7 @@ import {
  } from "./pokemon.js";
  
  
- const selectedPokemon = charizard; 
+ const selectedPokemon = wartortle; 
  const statlist = document.querySelector("#statlist")
  const typelist = document.querySelector("#typelist")
  const langList = document.querySelector("#langlist")
@@ -57,4 +57,8 @@ typeLi[i].innerHTML = ` ${typeArr[i]}`;
   };
   
   adjustBg(selectedPokemon);
+  const para = document.createElement("p");
+  const node = document.createTextNode("This is new.");
+  para.appendChild(para);
+  document.body.appendChild(para);
  
