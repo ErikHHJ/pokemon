@@ -9,9 +9,19 @@ import {
            wartortle,
             blastoise,
  } from "./pokemon.js";
+
  const pkmn = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise]
 const main = document.querySelector("main");
 const centerDiv = document.createElement("div");
+
+const lsArr = []
+console.log("item does not exist, continue");
+localStorage.setItem("favourites" , JSON.stringify(lsArr));
+const favourites = JSON.parse(localStorage.getItem("favourites"));
+console.log(favourites);
+
+
+
 const adjustBg = (element, pkmn) => {
     let selectedColor;
     switch (pkmn.type[0]) {
@@ -35,15 +45,35 @@ main.classList.add("center");
 const renderCards = (arr) => {
     for (let i = 0; i< arr.length; i++ ){
         const pkmn = arr[i];
+        const favAdd = (pkmn) => {
+            let current = JSON.parse(localStorage.getItem("favourites"));
+            console.log(current);
+            for (let i = 0; i < current.length; i++){
+                if (current[i].id === pkmn.id){
+                    current.splice(i, 1);
+                 
+                }
+                current.splice(i, 1);
+                 } 
+                 current.push(pkmn)
+            localStorage.setItem("favourites" , JSON.stringify(current));
+        };
+
         const {id, name, type, bilde, base} = pkmn;
         const container = document.createElement("div");
         container.classList.add("container");
+
+        const favButton = document.createElement("button");
+        favButton.innerHTML = ("Favourite")
+        favButton.classList.add("favbutton")
+        container.appendChild(favButton);
+
+        favButton.addEventListener("click" , favAdd);
         
 
         const heading = document.createElement("h3");
         heading.innerHTML = name.english;
-        ;
-        container.appendChild(heading)
+        container.appendChild(heading);
 
         const image = document.createElement("img");
         image.classList.add("pkmnimg");
@@ -55,19 +85,19 @@ const renderCards = (arr) => {
         
         const langHead = document.createElement("h4");
 
-langHead.innerHTML = "Name in other languages";
-container.appendChild(langHead);
-const langList = document.createElement("ul");
-const  jpn = document.createElement("li");
-const  cn = document.createElement("li");
-const  fr = document.createElement("li");
-jpn.innerHTML = name.japanese;
-cn.innerHTML = name.chinese;
-fr.innerHTML = name.french;
-langList.appendChild(jpn)
-langList.appendChild(cn)
-langList.appendChild(fr)
-container.appendChild(langList);
+        langHead.innerHTML = "Name in other languages";
+        container.appendChild(langHead);
+        const langList = document.createElement("ul");
+        const  jpn = document.createElement("li");
+        const  cn = document.createElement("li");
+        const  fr = document.createElement("li");
+        jpn.innerHTML = name.japanese;
+        cn.innerHTML = name.chinese;
+        fr.innerHTML = name.french;
+        langList.appendChild(jpn)
+        langList.appendChild(cn)
+        langList.appendChild(fr)
+        container.appendChild(langList);
 
         const separator = document.createElement("hr");
         container.appendChild(separator);
