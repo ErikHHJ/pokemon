@@ -1,5 +1,13 @@
+import { adjustBg, renderCards,  } from "./ny.js";
+const favKey = 'favourites';
+if (!localStorage.getItem(favKey)) {
+    localStorage.setItem(favKey, JSON.stringify(lsArr));
+  }
+  const favourites = JSON.parse(localStorage.getItem(favKey));
+
+const main = document.querySelector("main");
+main.classList.add("center");
 export const lsArr = []
-if (!localStorage.getItem("favourites")){
-    console.log("item does not exist, writing now");
-    localStorage.setItem("favourites" , JSON.stringify(lsArr));
-}
+
+renderCards (favourites)
+

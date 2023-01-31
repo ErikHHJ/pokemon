@@ -10,6 +10,8 @@ import {
             blastoise,
  } from "./pokemon.js";
 
+ import { updateArray, favKey } from "./utils.js";
+
  const pkmn = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise]
 const main = document.querySelector("main");
 const centerDiv = document.createElement("div");
@@ -22,7 +24,7 @@ console.log(favourites);
 
 
 
-const adjustBg = (element, pkmn) => {
+ export const adjustBg = (element, pkmn) => {
     let selectedColor;
     switch (pkmn.type[0]) {
       case 'Water':
@@ -42,33 +44,41 @@ const adjustBg = (element, pkmn) => {
   };
 main.classList.add("center");
 
-const renderCards = (arr) => {
-    for (let i = 0; i< arr.length; i++ ){
-        const pkmn = arr[i];
-        const favAdd = (pkmn) => {
-            let current = JSON.parse(localStorage.getItem("favourites"));
-            console.log(current);
-            for (let i = 0; i < current.length; i++){
-                if (current[i].id === pkmn.id){
-                    current.splice(i, 1);
-                 
-                }
-                current.splice(i, 1);
-                 } 
-                 current.push(pkmn)
-            localStorage.setItem("favourites" , JSON.stringify(current));
-        };
+/* const favAdd = (pkmn) => {
+    let current = JSON.parse(localStorage.getItem("favourites"));
+    console.log(current);
+    for (let i = 0; i < current.length; i++){
+        if (current[i].id === pkmn.id){
+            current.splice(i, 1);
+         
+        }
+        current.splice(i, 1);
+         } 
+         current.push(pkmn)
+    localStorage.setItem("favourites" , JSON.stringify(current));
+};*/
+
+export const renderCards = (arr) => {
+    arr.forEach((pkmn) => {
+       
+        
 
         const {id, name, type, bilde, base} = pkmn;
         const container = document.createElement("div");
         container.classList.add("container");
+
+        const addToFavs = () => {
+            let favs = JSON.parse(localStorage.getItem(favKey));
+            updateArray(favs, pkmn);
+          };
+      
 
         const favButton = document.createElement("button");
         favButton.innerHTML = ("Favourite")
         favButton.classList.add("favbutton")
         container.appendChild(favButton);
 
-        favButton.addEventListener("click" , favAdd);
+        favButton.addEventListener("click" , addToFavs);
         
 
         const heading = document.createElement("h3");
@@ -105,6 +115,7 @@ const renderCards = (arr) => {
         typesHead.innerHTML = "Types:";
         container.appendChild(typesHead);
         const typesList = document.createElement("ul");
+
         for (let i = 0; i < type.length; i++){
             let li = document.createElement("li")
             li.innerHTML = type[i]
@@ -118,6 +129,7 @@ const renderCards = (arr) => {
         container.appendChild(statsHead);
         const statsList = document.createElement("ul");
         const statValues = Object.values(base)
+
         for (let i = 0; i < statValues.length; i++){
             let li = document.createElement("li");
             switch (i){
@@ -153,7 +165,9 @@ const renderCards = (arr) => {
 
 
         main.appendChild(container);
-        adjustBg(container, arr[i])
-    }
+        adjustBg(container, pkmn)
+    
+    })
+  
 };
 renderCards(pkmn);
